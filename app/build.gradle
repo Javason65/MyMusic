@@ -52,9 +52,31 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    //添加MultiDex
+
+    //behavior依赖包
+    implementation "com.android.support:design:$rootProject.androidSupportVersion"
+
+    //    butterknife 注解绑定View
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //    glide图片显示框架
+    implementation 'com.github.bumptech.glide:glide:4.3.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.3.0'
+
+    //    viewPager indicator指示器,https://github.com/ongakuer/CircleIndicator
+    implementation 'me.relex:circleindicator:1.2.2@aar'
+
+    //    apache common lang3 一个StringUtils类
+    implementation 'org.apache.commons:commons-lang3:3.0'
+
+    //添加MultiDex   为了使用更多的方法
     implementation 'com.android.support:multidex:1.0.1'
+
+    //统一版本
     implementation "com.android.support:appcompat-v7:$rootProject.androidSupportVersion"
+
+
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

@@ -5,6 +5,7 @@ package com.javason.mymusic.activity;
 import com.javason.mymusic.util.OrmUtil;
 import com.javason.mymusic.util.SharedPreferencesUtil;
 
+import butterknife.ButterKnife;
 
 
 /**
@@ -21,7 +22,7 @@ public class BaseCommonActivity extends BaseActivity {
     @Override
     protected void initViews() {
         super.initViews();
-//        ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
 
         sp = SharedPreferencesUtil.getInstance(getApplicationContext());
