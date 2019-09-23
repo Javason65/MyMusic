@@ -86,6 +86,8 @@ public class Consts {
      * 值用小写的，好处是，直接就可以传递到服务端
      */
     public static final String NICKNAME = "nickname";
+    // TODO: 2019/9/23 第7个视频-启动页广告7：40秒 修改AK、AS值
+    //  build.gradle里面QQ的appKey和appId要申请开发者账号后修改第6个视频7：37秒
     public static final String AK = "d87b7e285d123411";
     public static final String AS = "1286ef0d6fe8f555";
     public static final String STYLE = "style";

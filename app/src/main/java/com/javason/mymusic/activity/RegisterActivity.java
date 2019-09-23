@@ -3,17 +3,26 @@ package com.javason.mymusic.activity;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import com.javason.mymusic.MainActivity;
 import com.javason.mymusic.R;
+import com.javason.mymusic.api.Api;
+import com.javason.mymusic.domain.Session;
 import com.javason.mymusic.domain.User;
+import com.javason.mymusic.domain.event.LoginSuccessEvent;
+import com.javason.mymusic.domain.response.DetailResponse;
+import com.javason.mymusic.reactivex.HttpListener;
 import com.javason.mymusic.util.StringUtil;
 import com.javason.mymusic.util.ToastUtil;
 
 import org.apache.commons.lang3.StringUtils;
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-public class RegisterActivity extends BaseCommonActivity {
+public class RegisterActivity extends BaseTitleActivity {
     @BindView(R.id.et_nickname)
     EditText et_nickname;
     @BindView(R.id.et_password)
@@ -88,6 +97,30 @@ public class RegisterActivity extends BaseCommonActivity {
                     public void onSucceeded(DetailResponse<Session> data) {
                         super.onSucceeded(data);
                         next(data.getData());
+                    }
+                });
+    }
+
+    public void next(Session session) {
+        User user = new User();
+        user.setPhone(phone);
+        user.setPassword(password);
+        user.setType(User.TYPE_PHONE);
+
+        Api.getInstance().login(user)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new HttpListener<DetailResponse<Session>>(getActivity()) {
+                    @Override
+                    public void onSucceeded(DetailResponse<Session> data) {
+                        super.onSucceeded(data);
+                        sp.setToken(data.getData().getToken());
+                        sp.setUserId(data.getData().getId());
+                        sp.setIMToken(data.getData().getIm_token());
+                        startActivityAfterFinishThis(MainActivity.class);
+
+                        //发布登陆成功信息，登陆界面好自动关闭
+                        EventBus.getDefault().post(new LoginSuccessEvent());
                     }
                 });
     }
