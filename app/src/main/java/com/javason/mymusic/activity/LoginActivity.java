@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 
 import com.javason.mymusic.MainActivity;
 import com.javason.mymusic.R;
@@ -80,6 +81,7 @@ public class LoginActivity extends BaseCommonActivity {
 
     @Override
     protected void initDatas() {
+        Log.i("TAG","initDatas in LoginActivity");
         super.initDatas();
         EventBus.getDefault().register(this);
     }

@@ -3,11 +3,12 @@ package com.javason.mymusic.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.javason.mymusic.util.Consts;
 import com.javason.mymusic.R;
+import com.javason.mymusic.util.Consts;
 
 
 /**
@@ -27,7 +28,7 @@ public class BaseActivity extends AppCompatActivity {
      * 设置数据
      */
     protected void initDatas() {
-
+        Log.i("TAG","initDatas in BaseActivity");
     }
 
     /**
@@ -37,20 +38,24 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     private void init() {
+        Log.i("TAG","init in BaseActivity");
         initViews();
         initDatas();
+        Log.i("TAG","initDatas in init in BaseActivity");
         initListener();
     }
 
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
+        Log.i("TAG","setContentView1 in BaseActivity");
         init();
     }
 
     @Override
     public void setContentView(View view) {
         super.setContentView(view);
+//        Log.i("TAG","setContentView2 in BaseActivity");
         init();
     }
 

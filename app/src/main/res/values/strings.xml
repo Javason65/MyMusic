@@ -104,4 +104,7 @@
     <string name="user_detail_count_info">关注 %1$d | 粉丝 %2$d</string>
     <string name="message_count_99">99+</string>
     <string name="list_detail">歌单详情</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

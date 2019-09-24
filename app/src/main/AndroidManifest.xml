@@ -3,34 +3,44 @@
     package="com.javason.mymusic">
 
     <application
-        android:allowBackup="true"
         android:name=".view.AppContext"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.UserDetailActivity"></activity>
         <activity
             android:name=".activity.RegisterActivity"
             android:label="@string/phone_register"
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.LoginPhoneActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/phone_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.GuideActivity"
-            android:theme="@style/Theme.AppCompat" />
-
-        <!-- youmi ad -->
+            android:theme="@style/Theme.AppCompat" /> <!-- youmi ad -->
         <!-- 有米SDK为了兼容Android N应用间共享文件行为变更而需要配置的FileProvider -->
         <!-- 这里主要为授予有米SDK拥有打开apk安装界面的功能 -->
         <!-- 请务必修改 android:authorities 为贵应用的标识，一般为 包名.fileProvider -->
+        <activity
+            android:name=".activity.SplashActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- end youmi ad -->
+        <activity
+            android:name=".MainActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.javason.mymusic.fileProvider"
@@ -40,18 +50,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider" />
         </provider>
-        <!-- end youmi ad -->
-
-        <activity
-            android:name=".activity.SplashActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

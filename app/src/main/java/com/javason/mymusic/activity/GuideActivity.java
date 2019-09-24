@@ -2,13 +2,11 @@ package com.javason.mymusic.activity;
 
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v4.view.ViewPager;
-
 import android.os.Bundle;
-
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.javason.mymusic.MainActivity;
 import com.javason.mymusic.R;
@@ -53,6 +51,7 @@ public class GuideActivity extends BaseCommonActivity {
 
     @Override
     protected void initDatas() {
+        Log.i("TAG","initDatas in GuideActivity");
         super.initDatas();
         adapter = new GuideAdapter(getActivity(), getSupportFragmentManager());
         vp.setAdapter(adapter);

@@ -2,14 +2,12 @@ package com.javason.mymusic.activity;
 
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.javason.mymusic.MainActivity;
 import com.javason.mymusic.R;
@@ -56,26 +54,34 @@ public class SplashActivity extends BaseCommonActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //得到当前界面的装饰视图
-        if(Build.VERSION.SDK_INT >= 21) {
-            View decorView = getWindow().getDecorView();
-            //设置让应用主题内容占据状态栏和导航栏
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            decorView.setSystemUiVisibility(option);
-            //设置状态栏和导航栏颜色为透明
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-            getWindow().setNavigationBarColor(Color.TRANSPARENT);
-        }
+        Log.i(TAG,"onCreate");
+//        //得到当前界面的装饰视图
+//        if(Build.VERSION.SDK_INT >= 21) {
+//            View decorView = getWindow().getDecorView();
+//            //设置让应用主题内容占据状态栏和导航栏
+//            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+//                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+//            decorView.setSystemUiVisibility(option);
+//            //设置状态栏和导航栏颜色为透明
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
+//            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+//        }
 //        //隐藏标题栏
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.hide();
         setContentView(R.layout.activity_splash);
+        Log.i(TAG,"setContentView");
+
+        //去除状态栏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     @Override
     protected void initDatas() {
+        Log.i(TAG,"initDatas in SplashActivity");
         super.initDatas();
+        Log.i(TAG,"super.initDatas");
 
         if (isShowGuide()) {
             handler.postDelayed(new Runnable() {
