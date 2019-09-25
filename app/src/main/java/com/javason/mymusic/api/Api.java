@@ -1,8 +1,6 @@
 package com.javason.mymusic.api;
 
 
-
-
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.javason.mymusic.domain.Session;
 import com.javason.mymusic.domain.User;
@@ -15,6 +13,7 @@ import com.javason.mymusic.view.AppContext;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -116,11 +115,11 @@ public class Api {
         return service.userDetail(id);
     }
 
-//    public Observable<DetailResponse<User>> userDetailByNickname(String nickname) {
-//        HashMap<String, String> data = new HashMap<>();
-//        data.put(Consts.NICKNAME, nickname);
-//        return service.userDetailByNickname(data);
-//    }
+    public Observable<DetailResponse<User>> userDetailByNickname(String nickname) {
+        HashMap<String, String> data = new HashMap<>();
+        data.put(Consts.NICKNAME, nickname);
+        return service.userDetailByNickname(data);
+    }
 //
 //    public Observable<ListResponse<List>> lists() {
 //        HashMap<String, String> query = new HashMap<>();

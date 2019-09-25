@@ -5,12 +5,15 @@ import com.javason.mymusic.domain.Session;
 import com.javason.mymusic.domain.User;
 import com.javason.mymusic.domain.response.DetailResponse;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.QueryMap;
 
 /**
  * Created by smile on 02/03/2018.
@@ -59,14 +62,14 @@ public interface Service {
 //    @GET("topics/{id}.json")
 //    Observable<DetailResponse<Topic>> topicDetail(@Path("id") String id, @QueryMap Map<String, String> data);
 //
-//    /**
-//     * 根据nickname,获取用户详情
-//     * @param data
-//     * @return
-//     */
-//    @GET("users/-1.json")
-//    Observable<DetailResponse<User>> userDetailByNickname(@QueryMap Map<String, String> data);
-//
+    /**
+     * 根据nickname,获取用户详情
+     * @param data
+     * @return
+     */
+    @GET("users/-1.json")
+    Observable<DetailResponse<User>> userDetailByNickname(@QueryMap Map<String, String> data);
+
 //
 //
 //    /**

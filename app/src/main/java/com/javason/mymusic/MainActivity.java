@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,13 +12,19 @@ import android.widget.TextView;
 
 import com.javason.mymusic.activity.BaseTitleActivity;
 import com.javason.mymusic.activity.LoginActivity;
+import com.javason.mymusic.activity.SettingsActivity;
 import com.javason.mymusic.activity.UserDetailActivity;
 import com.javason.mymusic.adapter.HomeAdapter;
 import com.javason.mymusic.api.Api;
 import com.javason.mymusic.domain.User;
+import com.javason.mymusic.domain.event.LogoutSuccessEvent;
 import com.javason.mymusic.domain.response.DetailResponse;
 import com.javason.mymusic.reactivex.HttpListener;
 import com.javason.mymusic.util.UserUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -74,6 +81,8 @@ public class MainActivity extends BaseTitleActivity implements View.OnClickListe
 
         //缓存三个页面
         vp.setOffscreenPageLimit(3);
+
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -89,24 +98,9 @@ public class MainActivity extends BaseTitleActivity implements View.OnClickListe
         datas.add(2);
         adapter.setDatas(datas);
 
-//        showUserInfo();
+        showUserInfo();
 
-        if (sp.isLogin()) {
-            //调用用户信息接口
-            Api.getInstance().userDetail(sp.getUserId())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new HttpListener<DetailResponse<User>>(getActivity()) {
-                        @Override
-                        public void onSucceeded(DetailResponse<User> data) {
-                            super.onSucceeded(data);
-                            showData(data.getData());
-                        }
-                    });
 
-        } else {
-            UserUtil.showNotLoginUser(getActivity(),iv_avatar,tv_nickname,tv_description);
-        }
     }
 
     @Override
@@ -118,13 +112,15 @@ public class MainActivity extends BaseTitleActivity implements View.OnClickListe
 
         vp.addOnPageChangeListener(this);
 
-       /* ll_settings.setOnClickListener(this);
+        ll_settings.setOnClickListener(this);
         ll_my_friend.setOnClickListener(this);
-        ll_message_container.setOnClickListener(this);*/
+        ll_message_container.setOnClickListener(this);
 
         //默认选中第二个页面，设置监听器在选择就会调用监听器
         vp.setCurrentItem(1);
     }
+
+
 
     private void showData(User data) {
         //将显示用户信息放到单独的类中，是为了重用，因为在用户详情界面会用到
@@ -144,10 +140,10 @@ public class MainActivity extends BaseTitleActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            /*case R.id.ll_settings:
+            case R.id.ll_settings:
                 startActivity(SettingsActivity.class);
-                closeDrawer();
-                break;*/
+//                closeDrawer();
+                break;
             case R.id.iv_music:
                 vp.setCurrentItem(0, true);
                 break;
@@ -175,6 +171,11 @@ public class MainActivity extends BaseTitleActivity implements View.OnClickListe
                 break;*/
         }
     }
+
+    private void closeDrawer() {
+        drawer_layout.closeDrawer(Gravity.START);
+    }
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -200,6 +201,38 @@ public class MainActivity extends BaseTitleActivity implements View.OnClickListe
 
     @Override
     public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void logoutSuccessEvent(LogoutSuccessEvent event) {
+        showUserInfo();
+    }
+
+    private void showUserInfo() {
+        //用户信息这部分，进来是看不到的，所以可以延后初始化
+        if (sp.isLogin()) {
+            //调用用户信息接口
+            Api.getInstance().userDetail(sp.getUserId())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new HttpListener<DetailResponse<User>>(getActivity()) {
+                        @Override
+                        public void onSucceeded(DetailResponse<User> data) {
+                            super.onSucceeded(data);
+                            showData(data.getData());
+                        }
+                    });
+
+        } else {
+            UserUtil.showNotLoginUser(getActivity(), iv_avatar, tv_nickname, tv_description);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
 
     }
 }
