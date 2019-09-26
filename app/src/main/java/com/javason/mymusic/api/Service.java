@@ -1,9 +1,13 @@
 package com.javason.mymusic.api;
 
 
+import com.javason.mymusic.domain.Advertisement;
+import com.javason.mymusic.domain.List;
 import com.javason.mymusic.domain.Session;
+import com.javason.mymusic.domain.Song;
 import com.javason.mymusic.domain.User;
 import com.javason.mymusic.domain.response.DetailResponse;
+import com.javason.mymusic.domain.response.ListResponse;
 
 import java.util.Map;
 
@@ -70,14 +74,14 @@ public interface Service {
     @GET("users/-1.json")
     Observable<DetailResponse<User>> userDetailByNickname(@QueryMap Map<String, String> data);
 
-//
-//
-//    /**
-//     * 歌单列表
-//     * @return
-//     */
-//    @GET("sheets.json")
-//    Observable<ListResponse<List>> lists(@QueryMap Map<String, String> data);
+
+
+    /**
+     * 歌单列表
+     * @return
+     */
+    @GET("sheets.json")
+    Observable<ListResponse<List>> lists(@QueryMap Map<String, String> data);
 //
 //    /**
 //     * 我创建的歌单列表
@@ -190,12 +194,12 @@ public interface Service {
 //    Observable<DetailResponse<Comment>> unlike(@Path("id") String id);
 //
 //
-//    /**
-//     * 单曲列表
-//     * @return
-//     */
-//    @GET("songs.json")
-//    Observable<ListResponse<Song>> songs();
+    /**
+     * 单曲列表
+     * @return
+     */
+    @GET("songs.json")
+    Observable<ListResponse<Song>> songs();
 //
 //    /**
 //     * 获取歌曲详情
@@ -292,10 +296,10 @@ public interface Service {
 //  //  @GET("lyrics.json")
 //  //  Observable<DetailResponse<Lyric>> lyricDetailWithBySongId(@QueryMap Map<String, String> data);
 //
-//    /**
-//     * 广告列表
-//     * @return
-//     */
-//    @GET("advertisements.json")
-//    Observable<ListResponse<Advertisement>> advertisements();
+    /**
+     * 广告列表
+     * @return
+     */
+    @GET("advertisements.json")
+    Observable<ListResponse<Advertisement>> advertisements();
 }

@@ -493,6 +493,9 @@ dependencies {
     //    palette
     implementation "com.android.support:palette-v7:$rootProject.androidSupportVersion"
 
+    //Recycler View header
+    implementation 'com.github.jdsjlzx:LRecyclerView:1.5.0'
+
     //    viewPager indicator指示器,https://github.com/ongakuer/CircleIndicator
     implementation 'me.relex:circleindicator:1.2.2@aar'
 
