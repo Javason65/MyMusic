@@ -7,7 +7,7 @@
     android:layout_marginRight="@dimen/item_icon_padding"
     android:orientation="vertical">
 
-    <com.ixuea.courses.mymusic.view.SquareLinearLayout
+    <com.javason.mymusic.view.SquareLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -54,7 +54,7 @@
                     android:textColor="@color/white" />
             </LinearLayout>
         </RelativeLayout>
-    </com.ixuea.courses.mymusic.view.SquareLinearLayout>
+    </com.javason.mymusic.view.SquareLinearLayout>
 
     <TextView
         android:id="@+id/tv_title"
