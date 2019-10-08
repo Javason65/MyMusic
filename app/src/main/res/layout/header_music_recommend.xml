@@ -24,7 +24,8 @@
             android:layout_gravity="center"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="@dimen/radius"
-            app:cardElevation="@dimen/elevation">
+            app:cardElevation="@dimen/elevation"
+            >
 
             <com.youth.banner.Banner
                 android:id="@+id/banner"

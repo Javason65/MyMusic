@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.javason.mymusic.R;
+import com.javason.mymusic.activity.BaseWebViewActivity;
+import com.javason.mymusic.activity.MusicPlayerActivity;
 import com.javason.mymusic.adapter.BaseRecyclerViewAdapter;
 import com.javason.mymusic.adapter.RecommendAdapter;
 import com.javason.mymusic.api.Api;
@@ -63,8 +65,7 @@ public class RecommendFragment extends BaseCommonFragment implements OnBannerLis
         super.initViews();
         rv=findViewById(R.id.rv);
         rv.setHasFixedSize(true);
-        rv.setPullRefreshEnabled(false);
-        rv.setLoadMoreEnabled(false);
+
         layoutManager = new GridLayoutManager(getActivity(), 3);
         rv.setLayoutManager(layoutManager);
 
@@ -84,13 +85,27 @@ public class RecommendFragment extends BaseCommonFragment implements OnBannerLis
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        //开始轮播
+        banner.startAutoPlay();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        //结束轮播
+        banner.stopAutoPlay();
+    }
+
+    @Override
     protected void initDatas() {
         super.initDatas();
         adapter=new RecommendAdapter(getActivity());
         adapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseRecyclerViewAdapter.ViewHolder holder, int position) {
-
+                startActivity(MusicPlayerActivity.class);
             }
         });
 
@@ -109,9 +124,14 @@ public class RecommendFragment extends BaseCommonFragment implements OnBannerLis
         });
 
 
+
+
         adapterWrapper.addHeaderView(createHeaderView());
 
         rv.setAdapter(adapterWrapper);
+
+        rv.setPullRefreshEnabled(false);
+        rv.setLoadMoreEnabled(false);
 
 
         fetchData();
@@ -210,7 +230,7 @@ public class RecommendFragment extends BaseCommonFragment implements OnBannerLis
     @Override
     public void OnBannerClick(int position) {
         Advertisement advertisement = bannerData.get(position);
-        //BaseWebViewActivity.start(getMainActivity(),"活动详情",banner.getUri());
+//        BaseWebViewActivity.start(getMainActivity(),"活动详情",banner.getUri());
         BaseWebViewActivity.start(getMainActivity(),"活动详情","http://www.ixuea.com");
     }
 

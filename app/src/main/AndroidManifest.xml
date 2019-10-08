@@ -10,12 +10,19 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SettingsActivity"
+        <activity
+            android:name=".activity.MusicPlayerActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.SettingsActivity"
             android:label="@string/settings"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activity.UserDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.UserDetailActivity"
             android:label="@string/user_detail"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.RegisterActivity"
             android:label="@string/phone_register"
@@ -28,11 +35,12 @@
             android:label="@string/phone_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activity.BaseWebViewActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activity.GuideActivity"
-            android:theme="@style/Theme.AppCompat" /> <!-- youmi ad -->
-        <!-- 有米SDK为了兼容Android N应用间共享文件行为变更而需要配置的FileProvider -->
-        <!-- 这里主要为授予有米SDK拥有打开apk安装界面的功能 -->
-        <!-- 请务必修改 android:authorities 为贵应用的标识，一般为 包名.fileProvider -->
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -41,12 +49,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- end youmi ad -->
+        </activity> <!-- youmi ad -->
+        <!-- 有米SDK为了兼容Android N应用间共享文件行为变更而需要配置的FileProvider -->
+        <!-- 这里主要为授予有米SDK拥有打开apk安装界面的功能 -->
+        <!-- 请务必修改 android:authorities 为贵应用的标识，一般为 包名.fileProvider -->
         <activity
             android:name=".MainActivity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar" />
-
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- end youmi ad -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.javason.mymusic.fileProvider"
@@ -56,6 +66,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider" />
         </provider>
+
+        <service
+            android:name=".service.MusicPlayerService"
+            android:enabled="true"
+            android:exported="false"></service>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
