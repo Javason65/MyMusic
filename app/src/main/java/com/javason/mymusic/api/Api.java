@@ -203,9 +203,9 @@ public class Api {
 //        return service.songsDetail(id);
 //    }
 //
-//    public Observable<DetailResponse<List>> listDetail(String id) {
-//        return service.listDetail(id);
-//    }
+    public Observable<DetailResponse<List>> listDetail(String id) {
+        return service.listDetail(id);
+    }
 //
 //    //public Observable<ListResponse<Feed>> feedsByTopic(String topic) {
 //    //    HashMap<String, String> data = new HashMap<>();

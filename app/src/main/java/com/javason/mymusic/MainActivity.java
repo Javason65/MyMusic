@@ -93,9 +93,9 @@ public class MainActivity extends BaseTitleActivity implements View.OnClickListe
         vp.setAdapter(adapter);
 
         ArrayList<Integer> datas = new ArrayList<>();
-        datas.add(0);
-        datas.add(1);
-        datas.add(2);
+        datas.add(7);
+        datas.add(8);
+        datas.add(9);
         adapter.setDatas(datas);
 
         showUserInfo();

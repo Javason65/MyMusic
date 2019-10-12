@@ -1,6 +1,7 @@
 package com.javason.mymusic.parser;
 
 
+import com.javason.mymusic.parser.domain.LRCLyricsParser;
 import com.javason.mymusic.parser.domain.Lyric;
 
 /**
@@ -27,7 +28,7 @@ public abstract class LyricsParser {
     public static LyricsParser parse(int type, String content) {
         switch (type) {
             case Lyric.TYPE_LRC:
-//                return new LRCLyricsParser(type, content);
+                return new LRCLyricsParser(type, content);
             case Lyric.TYPE_KSC:
                 return new KSCLyricsParser(type, content);
             default:

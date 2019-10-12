@@ -373,6 +373,7 @@ public class LyricView extends View {
         //在当前位置绘制正在演唱的歌词
         Line line = lyricsLines.get(lineNumber);
 
+
         //当前歌词的宽高
         float textWidth = getTextWidth(backgroundTextPaint, line.getLineLyrics());
         float textHeight = getTextHeight(backgroundTextPaint);
@@ -525,6 +526,7 @@ public class LyricView extends View {
             lyricCurrentWordIndex = 0;
 
             lineNumber = newLineNumber;
+            System.out.println("show---LineNumber:="+lineNumber);
 
             //要滚动到的距离
             float distanceY = lineNumber * getLineHeight(backgroundTextPaint);
@@ -547,7 +549,7 @@ public class LyricView extends View {
         return lyric == null;
     }
 
-    private void smoothScrollTo(float distanceY) {
+    private void smoothScrollTo(final float distanceY) {
         if (valueAnimator != null && valueAnimator.isRunning()) {
             valueAnimator.cancel();
         }

@@ -79,9 +79,7 @@ public class SplashActivity extends BaseCommonActivity {
 
     @Override
     protected void initDatas() {
-        Log.i(TAG,"initDatas in SplashActivity");
         super.initDatas();
-        Log.i(TAG,"super.initDatas");
 
         if (isShowGuide()) {
             handler.postDelayed(new Runnable() {

@@ -214,8 +214,8 @@ public interface Service {
 //     * @param id
 //     * @return
 //     */
-//    @GET("sheets/{id}.json")
-//    Observable<DetailResponse<List>> listDetail(@Path("id") String id);
+    @GET("sheets/{id}.json")
+    Observable<DetailResponse<List>> listDetail(@Path("id") String id);
 //
 //    /**
 //     * 评论列表
