@@ -198,11 +198,11 @@ public class Api {
     public Observable<ListResponse<Song>> songs() {
         return service.songs();
     }
-//
-//    public Observable<DetailResponse<Song>> songsDetail(String id) {
-//        return service.songsDetail(id);
-//    }
-//
+
+    public Observable<DetailResponse<Song>> songsDetail(String id) {
+        return service.songsDetail(id);
+    }
+
     public Observable<DetailResponse<List>> listDetail(String id) {
         return service.listDetail(id);
     }

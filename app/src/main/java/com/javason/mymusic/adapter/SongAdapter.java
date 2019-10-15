@@ -7,6 +7,7 @@ import android.view.View;
 import com.javason.mymusic.R;
 import com.javason.mymusic.domain.Song;
 import com.javason.mymusic.fragment.SongMoreDialogFragment;
+import com.javason.mymusic.manager.PlayListManager;
 
 
 /**
@@ -17,7 +18,7 @@ import com.javason.mymusic.fragment.SongMoreDialogFragment;
 public class SongAdapter extends BaseQuickRecyclerViewAdapter<Song> {
 
 
-//    private final PlayListManager playList;
+    private final PlayListManager playList;
     private final FragmentManager fragmentManager;
     private OnSongListener onSongListener;
 //    private DownloadManager downloadManager;
@@ -34,9 +35,9 @@ public class SongAdapter extends BaseQuickRecyclerViewAdapter<Song> {
 //        this.downloadManager=downloadManager;
 //    }
 
-    public SongAdapter(Context context, int layoutId, FragmentManager fragmentManager) {
+    public SongAdapter(Context context, int layoutId, FragmentManager fragmentManager, PlayListManager playList) {
         super(context, layoutId);
-
+        this.playList=playList;
         this.fragmentManager=fragmentManager;
 
     }
@@ -48,12 +49,12 @@ public class SongAdapter extends BaseQuickRecyclerViewAdapter<Song> {
 
         holder.setText(R.id.tv_info,data.getArtist_name()+" - "+data.getAlbum_title());
 
-//        //当前播放
-//        if (data.equals(playList.getPlayData())) {
-//            holder.setTextColorRes(R.id.tv_title, R.color.main_color);
-//        } else {
-//            holder.setTextColorRes(R.id.tv_title,R.color.text);
-//        }
+        //当前播放
+        if (data.equals(playList.getPlayData())) {
+            holder.setTextColorRes(R.id.tv_title, R.color.main_color);
+        } else {
+            holder.setTextColorRes(R.id.tv_title,R.color.text);
+        }
 //
 //        //是否下载
 //        DownloadInfo downloadInfo = downloadManager.getDownloadById(data.getId());

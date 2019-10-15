@@ -200,15 +200,15 @@ public interface Service {
      */
     @GET("songs.json")
     Observable<ListResponse<Song>> songs();
-//
-//    /**
-//     * 获取歌曲详情
-//     * @param id
-//     * @return
-//     */
-//    @GET("songs/{id}.json")
-//    Observable<DetailResponse<Song>> songsDetail(@Path("id") String id);
-//
+
+    /**
+     * 获取歌曲详情
+     * @param id
+     * @return
+     */
+    @GET("songs/{id}.json")
+    Observable<DetailResponse<Song>> songsDetail(@Path("id") String id);
+
 //    /**
 //     * 获取歌单详情
 //     * @param id

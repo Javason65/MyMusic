@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import com.javason.mymusic.manager.MusicPlayerManager;
+import com.javason.mymusic.manager.PlayListManager;
 import com.javason.mymusic.manager.impl.MusicPlayerManagerImpl;
+import com.javason.mymusic.manager.impl.PlayListManagerImpl;
 import com.javason.mymusic.util.ServiceUtil;
 
 public class MusicPlayerService extends Service {
     private static MusicPlayerManager manager;
+    private static PlayListManager playListManager;
 //    private static PlayListManager playListManager;
 //    private static FloatingLayoutManager floatingLayoutManager;
     /**
@@ -27,6 +30,21 @@ public class MusicPlayerService extends Service {
             MusicPlayerService.manager = MusicPlayerManagerImpl.getInstance(context);
         }
         return manager;
+    }
+
+    /**
+     * 获取一个PlayListManager对象
+     * @param context
+     * @return
+     */
+    public static PlayListManager getPlayListManager(Context context) {
+        startService(context);
+
+        if (MusicPlayerService.playListManager == null) {
+            //初始化列表管理器
+            MusicPlayerService.playListManager = PlayListManagerImpl.getInstance(context);
+        }
+        return playListManager;
     }
 
     private static void startService(Context context) {

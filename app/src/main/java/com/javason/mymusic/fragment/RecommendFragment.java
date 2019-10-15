@@ -15,6 +15,7 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.javason.mymusic.R;
 import com.javason.mymusic.activity.BaseWebViewActivity;
 import com.javason.mymusic.activity.ListDetailActivity;
+import com.javason.mymusic.activity.MusicPlayerActivity;
 import com.javason.mymusic.adapter.BaseRecyclerViewAdapter;
 import com.javason.mymusic.adapter.RecommendAdapter;
 import com.javason.mymusic.api.Api;
@@ -22,7 +23,9 @@ import com.javason.mymusic.domain.Advertisement;
 import com.javason.mymusic.domain.List;
 import com.javason.mymusic.domain.Song;
 import com.javason.mymusic.domain.response.ListResponse;
+import com.javason.mymusic.manager.PlayListManager;
 import com.javason.mymusic.reactivex.HttpListener;
+import com.javason.mymusic.service.MusicPlayerService;
 import com.javason.mymusic.util.DataUtil;
 import com.javason.mymusic.util.ImageUtil;
 import com.youth.banner.Banner;
@@ -46,6 +49,7 @@ public class RecommendFragment extends BaseCommonFragment implements OnBannerLis
     private LinearLayout ll_day_container;
     private TextView tv_day;
     private java.util.List<Advertisement> bannerData;
+    private PlayListManager playListManager;
 
     @Override
     protected View getLayoutView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -101,18 +105,19 @@ public class RecommendFragment extends BaseCommonFragment implements OnBannerLis
     @Override
     protected void initDatas() {
         super.initDatas();
+        playListManager = MusicPlayerService.getPlayListManager(getActivity().getApplicationContext());
         adapter=new RecommendAdapter(getActivity());
         adapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseRecyclerViewAdapter.ViewHolder holder, int position) {
                 Object data =  adapter.getData(position);
                 if (data instanceof Song) {
-//                    //单曲
-//                    ArrayList<Song> list = new ArrayList<>();
-//                    list.add((Song) data);
-//                    playListManager.setPlayList(list);
-//                    playListManager.play((Song) data);
-//                    startActivity(MusicPlayerActivity.class);
+                    //单曲
+                    ArrayList<Song> list = new ArrayList<>();
+                    list.add((Song) data);
+                    playListManager.setPlayList(list);
+                    playListManager.play((Song) data);
+                    startActivity(MusicPlayerActivity.class);
                 } else if (data instanceof List) {
                     //歌单
                     startActivityExtraId(ListDetailActivity.class,((List) data).getId());

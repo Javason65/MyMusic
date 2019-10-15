@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.javason.mymusic.activity.BaseTitleActivity;
+import com.javason.mymusic.activity.BaseMusicPlayerActivity;
 import com.javason.mymusic.activity.LoginActivity;
 import com.javason.mymusic.activity.SettingsActivity;
 import com.javason.mymusic.activity.UserDetailActivity;
@@ -32,7 +32,7 @@ import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends BaseTitleActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class MainActivity extends BaseMusicPlayerActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
     private DrawerLayout drawer_layout;
     ImageView iv_avatar;
     TextView tv_nickname;
@@ -153,22 +153,22 @@ public class MainActivity extends BaseTitleActivity implements View.OnClickListe
             case R.id.iv_video:
                 vp.setCurrentItem(2, true);
                 break;
-           /* case R.id.iv_avatar:
+            case R.id.iv_avatar:
                 avatarClick();
                 closeDrawer();
                 break;
-            case R.id.ll_my_friend:
-                startActivity(MyFriendActivity.class);
-                closeDrawer();
-                break;
-            case R.id.ll_message_container:
-                startActivity(MessageActivity.class);
-                closeDrawer();
-                break;
+//            case R.id.ll_my_friend:
+//                startActivity(MyFriendActivity.class);
+//                closeDrawer();
+//                break;
+//            case R.id.ll_message_container:
+//                startActivity(MessageActivity.class);
+//                closeDrawer();
+//                break;
             default:
                 //如果当前界面没有处理，就调用父类的方法
                 super.onClick(v);
-                break;*/
+                break;
         }
     }
 

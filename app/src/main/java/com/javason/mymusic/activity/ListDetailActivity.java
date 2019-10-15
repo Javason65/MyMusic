@@ -41,7 +41,7 @@ import org.apache.commons.lang3.StringUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class ListDetailActivity extends BaseTitleActivity implements SongAdapter.OnSongListener {
+public class ListDetailActivity extends BaseMusicPlayerActivity implements SongAdapter.OnSongListener, View.OnClickListener {
     private LRecyclerView rv;
     private ImageView iv_icon;
     private TextView tv_title;
@@ -59,6 +59,9 @@ public class ListDetailActivity extends BaseTitleActivity implements SongAdapter
     private SongAdapter adapter;
     private LRecyclerViewAdapter adapterWrapper;
     private List data;
+//    private PlayListManager playListManager;
+//    private MusicPlayerManager musicPlayerManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,14 +87,18 @@ public class ListDetailActivity extends BaseTitleActivity implements SongAdapter
     @Override
     protected void initDatas() {
         super.initDatas();
+        //已在父类中初始化
+//        playListManager = MusicPlayerService.getPlayListManager(getApplicationContext());
+//        musicPlayerManager = MusicPlayerService.getMusicPlayerManager(getApplicationContext());
         id = getIntent().getStringExtra(Consts.ID);
 
 
-        adapter = new SongAdapter(getActivity(), R.layout.item_song_list_detail, getSupportFragmentManager());
+//        adapter = new SongAdapter(getActivity(), R.layout.item_song_list_detail, getSupportFragmentManager());
+        adapter = new SongAdapter(getActivity(), R.layout.item_song_list_detail, getSupportFragmentManager(),playListManager);
         adapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseRecyclerViewAdapter.ViewHolder holder, int position) {
-//                play(position);
+                play(position);
             }
         });
         adapter.setOnSongListener(this);
@@ -105,6 +112,22 @@ public class ListDetailActivity extends BaseTitleActivity implements SongAdapter
         rv.setLoadMoreEnabled(false);
 
         fetchData();
+    }
+
+    @Override
+    protected void initListener() {
+        super.initListener();
+        ll_play_all_container.setOnClickListener(this);
+        ll_comment_container.setOnClickListener(this);
+        bt_collection.setOnClickListener(this);
+    }
+
+    private void play(int position) {
+        Song data = adapter.getData(position);
+        playListManager.setPlayList(adapter.getDatas());
+        playListManager.play(data);
+        adapter.notifyDataSetChanged();
+        startActivity(MusicPlayerActivity.class);
     }
 
     private void fetchData() {
@@ -224,5 +247,26 @@ public class ListDetailActivity extends BaseTitleActivity implements SongAdapter
     @Override
     public void onDeleteClick(Song song) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_play_all_container:
+                play(0);
+                break;
+            case R.id.bt_collection:
+//                collectionList();
+                break;
+            case R.id.ll_comment_container:
+//                Intent intent = new Intent(this, CommentListActivity.class);
+//                intent.putExtra(Consts.LIST_ID,id);
+//                intent.putExtra(Consts.STYLE,Consts.STYLE_LIST);
+//                startActivity(intent);
+//                break;
+            default:
+                super.onClick(v);
+                break;
+        }
     }
 }
